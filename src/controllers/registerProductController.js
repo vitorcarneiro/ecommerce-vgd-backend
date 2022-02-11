@@ -1,11 +1,11 @@
 import db from "../dataBase.js";
 
 export async function registerProduct(req, res) {
-  const products = req.body;
+  const product = req.body;
 
   const productExist = await db
     .collection("products")
-    .findOne({ name: products.name });
+    .findOne({ name: product.name });
 
   if (productExist) {
     res.sendStatus(409);
@@ -13,7 +13,7 @@ export async function registerProduct(req, res) {
   }
 
   try {
-    await db.collection("products").insertOne(products);
+    await db.collection("products").insertOne(product);
     res.sendStatus(201);
   } catch {
     res.sendStatus(500);
