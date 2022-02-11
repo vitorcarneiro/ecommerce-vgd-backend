@@ -5,7 +5,7 @@ export async function registerProduct(req, res) {
 
   const productExist = await db
     .collection("products")
-    .insertOne(product);
+    .findOne({ name: product.name });
 
   if (productExist) {
     res.sendStatus(409);
