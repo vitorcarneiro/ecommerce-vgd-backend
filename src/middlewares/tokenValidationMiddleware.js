@@ -9,7 +9,7 @@ export async function tokenValidationMiddleware(req, res, next) {
   const session = await db.collection("sessions").findOne({ token });
 
   if (!session) {
-    return res.send("AAAAA", token);
+    return res.sendStatus(401);
   }
 
   const user = await db.collection("users").findOne({ _id: session.userId });
@@ -17,6 +17,6 @@ export async function tokenValidationMiddleware(req, res, next) {
     res.sendStatus(401);
   }
 
-  res.locals.user = session;
+  res.locals.user = user;
   next();
 }
