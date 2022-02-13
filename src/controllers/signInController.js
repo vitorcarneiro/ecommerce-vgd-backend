@@ -20,7 +20,7 @@ export async function signIn(req, res) {
         token,
       });
 
-      const userInfoResponse = { token, user: registeredUser.name };
+      const userInfoResponse = { token: token, user: registeredUser.name };
       res.send(userInfoResponse);
     } else {
       res.sendStatus(401);
