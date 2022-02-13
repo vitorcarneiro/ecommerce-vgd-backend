@@ -2,8 +2,9 @@ import { ObjectId } from "mongodb";
 import db from "../dataBase.js";
 
 export async function postCart(req, res) {
-  const user = req.locals.user;
+  const user = res.locals.user;
   const cartItem = req.body;
+  console.log(cartItem);
 
   if (!user) {
     return res.sendStatus(403);
@@ -23,8 +24,8 @@ export async function postCart(req, res) {
         userId: user,
         cart: [cartItem],
       });
-    } else if (userCart) {
-      const cart = [...cart, newCartItem];
+    } else {
+      const cart = [...userCart.cart, cartItem];
       const updateCart = await db
         .collection("cart")
         .updateOne({ userId: user }, { $set: { cart: cart } });
