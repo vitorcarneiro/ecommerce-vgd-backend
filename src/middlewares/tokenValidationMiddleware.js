@@ -3,7 +3,6 @@ import db from "../dataBase.js";
 export async function tokenValidationMiddleware(req, res, next) {
   const { authorization } = req.headers;
   const token = authorization?.replace("Bearer ", "");
-  console.log(token);
 
   if (!token) return res.sendStatus(401);
 
@@ -19,6 +18,5 @@ export async function tokenValidationMiddleware(req, res, next) {
   }
 
   res.locals.user = user;
-  console.log("user", res.locals.user);
   next();
 }

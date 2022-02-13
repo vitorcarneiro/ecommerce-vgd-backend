@@ -4,7 +4,6 @@ import db from "../dataBase.js";
 export async function postCart(req, res) {
   const user = res.locals.user;
   const cartItem = req.body;
-  console.log(cartItem);
 
   if (!user) {
     return res.sendStatus(403);
@@ -22,10 +21,10 @@ export async function postCart(req, res) {
     if (!userCart) {
       await db.collection("cart").insertOne({
         userId: user,
-        cart: [cartItem],
+        cart: [{ ...newCartItem, cartQTY: 1 }],
       });
     } else {
-      const cart = [...userCart.cart, cartItem];
+      const cart = [...userCart.cart, { ...newCartItem, cartQTY: 1 }];
       const updateCart = await db
         .collection("cart")
         .updateOne({ userId: user }, { $set: { cart: cart } });
