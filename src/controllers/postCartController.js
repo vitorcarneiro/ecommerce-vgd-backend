@@ -19,7 +19,7 @@ export async function postCart(req, res) {
   try {
     const userCart = await db
       .collection("cart")
-      .findOne({ userId: session.user });
+      .findOne({ userId: "session.user" });
     if (!userCart) {
       await db.collection("cart").insertOne({
         userId: user,
