@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 import db from "../dataBase.js";
 
 export async function postCart(req, res) {
-  const user = req.locals.user;
+  const session = req.locals.session;
   const cartItem = req.body;
 
   if (!user) {
@@ -17,7 +17,9 @@ export async function postCart(req, res) {
   }
 
   try {
-    const userCart = await db.collection("cart").findOne({ userId: user });
+    const userCart = await db
+      .collection("cart")
+      .findOne({ userId: session.user });
     if (!userCart) {
       await db.collection("cart").insertOne({
         userId: user,
