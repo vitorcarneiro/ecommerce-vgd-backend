@@ -24,12 +24,28 @@ export async function postCart(req, res) {
         cart: [{ ...newCartItem, cartQTY: 1 }],
       });
     } else {
-      const cart = [...userCart.cart, { ...newCartItem, cartQTY: 1 }];
-      const updateCart = await db
+      let item = userCart.cart?.find( item => item.name === newCartItem.name);
+
+      if (!item) {
+        const cart = [...userCart.cart, { ...newCartItem, cartQTY: 1 }];
+        console.log(cart);
+        const updateCart = await db
         .collection("cart")
         .updateOne({ userId: user }, { $set: { cart: cart } });
-      if (updateCart) {
-        return res.sendStatus(200);
+        if (updateCart) {
+          return res.sendStatus(200);
+        }
+        
+      } else {
+        item.cartQTY++;
+        const cart = [...userCart.cart];
+        console.log(cart);
+        const updateCart = await db
+        .collection("cart")
+        .updateOne({ userId: user }, { $set: { cart: cart } });
+        if (updateCart) {
+          return res.sendStatus(200);
+        }
       }
     }
   } catch {
