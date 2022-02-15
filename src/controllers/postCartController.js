@@ -4,7 +4,6 @@ import db from "../dataBase.js";
 export async function postCart(req, res) {
   const user = res.locals.user;
   const cartItem = req.body;
-  console.log(req.body);
 
   if (!user) {
     return res.sendStatus(403);
