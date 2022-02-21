@@ -1,6 +1,6 @@
 # Ecommerce Meu Velho Material de Construcao
 
-Meu Velho Material de Construcao is a Hardware and Paint Store, where you can buy the best products with the lowest price.
+Meu Velho Material de Construcao is a Hardware and Paint Store, where you can buy the best products with the lowest prices.
 
 It's a mobile ecommerce app, you can see it [here](https://ecommerce-vgd-frontend.vercel.app).
 
