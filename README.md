@@ -25,8 +25,6 @@ This repository contains the back-end code. You can find the front-end code [her
 - Home
 - Cart
 - Checkout
-- Send a normal message
-- Send a private message
 - Save cart and user info on database mongoDB
 
 ## Technologies
